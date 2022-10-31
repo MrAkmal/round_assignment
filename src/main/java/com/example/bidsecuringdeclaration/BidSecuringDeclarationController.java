@@ -5,6 +5,7 @@ import com.example.bidsecuringdeclaration.dto.BidSecuringDeclarationDTO;
 import com.example.payload.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +21,21 @@ public class BidSecuringDeclarationController {
         this.service = service;
     }
 
+    @GetMapping
+    public ResponseEntity<ResponseDTO<List<BidSecuringDeclarationDTO>>> getAllBidSecuringDeclaration() {
+        return service.getAllBidSecuringDeclaration();
+    }
+
+
     @GetMapping("/{tenderId}/{bidderId}")
     public ResponseEntity<ResponseDTO<List<BidSecuringDeclarationDTO>>> getBidSecuringDeclarationByTenderIdAndBidderId(@PathVariable Integer tenderId, @PathVariable Integer bidderId) {
         return service.getBidSecuringDeclarationByTenderIdAndBidderId(tenderId, bidderId);
     }
 
+
     @PostMapping
-    public ResponseEntity<ResponseDTO<BidSecuringDeclarationDTO>> create(@RequestBody BidSecuringDeclarationCreateDTO dto) {
+    public ResponseEntity<ResponseDTO<BidSecuringDeclarationDTO>> create(@RequestBody BidSecuringDeclarationCreateDTO dto, BindingResult result) {
+
         return service.create(dto);
     }
 

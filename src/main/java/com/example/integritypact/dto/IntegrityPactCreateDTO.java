@@ -2,7 +2,6 @@ package com.example.integritypact.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -18,7 +17,6 @@ public class IntegrityPactCreateDTO {
     private Integer bidderId;
 
     @NotNull
-    @Min(value = 1, message = "tenderId id required")
     private Integer tenderId;
 
     private Boolean declarationStatus;

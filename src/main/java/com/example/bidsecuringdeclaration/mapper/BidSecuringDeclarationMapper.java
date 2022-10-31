@@ -20,6 +20,7 @@ public class BidSecuringDeclarationMapper {
 
     }
 
+
     public BidSecuringDeclarationDTO toDTO(BidSecuringDeclaration bidSecuringDeclaration) {
 
         return BidSecuringDeclarationDTO.builder()

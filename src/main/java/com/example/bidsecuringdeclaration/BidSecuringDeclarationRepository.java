@@ -16,5 +16,14 @@ public interface BidSecuringDeclarationRepository extends JpaRepository<BidSecur
             "from BidSecuringDeclaration bsd where bsd.tenderId= :tenderId and bsd.bidderId= :bidderId ")
     List<BidSecuringDeclarationDTO> getBidSecuringDeclarationByTenderIdAndBidderId(Integer tenderId, Integer bidderId);
 
+
     Optional<BidSecuringDeclaration> findByTenderIdAndBidderId(Integer tenderId, Integer bidderId);
+
+
+    @Query("select " +
+            "new com.example.bidsecuringdeclaration.dto.BidSecuringDeclarationDTO(" +
+            "bsd.id,bsd.bidderId,bsd.tenderId,bsd.declarationStatus,bsd.declarationTime" +
+            ") " +
+            "from BidSecuringDeclaration bsd ")
+    List<BidSecuringDeclarationDTO> getAll();
 }
