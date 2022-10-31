@@ -1,9 +1,8 @@
 package com.example.round.two;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import com.example.tenderitem.TenderItem;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,6 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "round_two_rate")
 public class RoundTwoRate {
@@ -30,8 +30,10 @@ public class RoundTwoRate {
     private int userId;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private RoundTwo roundTwo;
+    private RoundTwo roundOne;
 
-    private int tenderItemId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private TenderItem tenderItem;
 
 }

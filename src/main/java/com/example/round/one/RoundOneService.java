@@ -6,7 +6,6 @@ import com.example.round.RoundService;
 import com.example.round.dto.RoundCreateDTO;
 import com.example.round.dto.RoundOneCreateDTO;
 import com.example.round.dto.RoundOneDTO;
-import com.example.tenderitem.TenderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +19,14 @@ public class RoundOneService {
 
     private final RoundService roundService;
 
-    private final TenderItemService tenderItemService;
+    private final RoundOneRateService roundOneRateService;
+
 
     @Autowired
-    public RoundOneService(RoundOneRepository repository, RoundService roundService, TenderItemService tenderItemService) {
+    public RoundOneService(RoundOneRepository repository, RoundService roundService, RoundOneRateService roundOneRateService) {
         this.repository = repository;
         this.roundService = roundService;
-        this.tenderItemService = tenderItemService;
+        this.roundOneRateService = roundOneRateService;
     }
 
     public ResponseEntity<ResponseDTO<RoundOneDTO>> create(RoundOneCreateDTO dto) {
@@ -35,8 +35,7 @@ public class RoundOneService {
 
         RoundOne roundOne = repository.save(fromCreateDTO(dto, round));
 
-        tenderItemService.create();
-
+        roundOneRateService.create(roundOne);
 
         return new ResponseEntity<>(new ResponseDTO<>(toDTO(roundOne), "Success", HttpStatus.CREATED.value()), HttpStatus.OK);
 

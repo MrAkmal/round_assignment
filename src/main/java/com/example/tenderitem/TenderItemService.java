@@ -27,8 +27,13 @@ public class TenderItemService {
 
     public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAllTenderItemsByTenderId(Integer tenderId) {
 
-        return new ResponseEntity<>(new ResponseDTO<>(repository.getAllTenderItemsByTenderId(tenderId), "success", 200), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDTO<>(getAllTenderItems(tenderId), "success", 200), HttpStatus.OK);
     }
+
+    public List<TenderItemDTO> getAllTenderItems(Integer tenderId){
+        return repository.getAllTenderItemsByTenderId(tenderId);
+    }
+
 
     public ResponseEntity<ResponseDTO<TenderItemDTO>> create(TenderItemCreateDTO dto) {
 
