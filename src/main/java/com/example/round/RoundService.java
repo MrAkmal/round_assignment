@@ -1,12 +1,14 @@
 package com.example.round;
 
+import com.example.payload.ResponseDTO;
 import com.example.round.dto.RoundCreateDTO;
+import com.example.round.dto.RoundDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Column;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,4 +53,22 @@ public class RoundService {
     }
 
 
+    public ResponseEntity<ResponseDTO<List<RoundDTO>>> getAllByTenderIdAndRoundNumber(Integer tenderId, Integer roundNumber) {
+
+        List<Round> rounds = repository.findRoundsByTenderIdAndRoundNumber(tenderId, roundNumber);
+
+        List<RoundDTO> roundDTOS = rounds.stream().map(round -> {
+            return RoundDTO.builder()
+                    .id(round.getId())
+                    .tenderId(round.getTenderId())
+                    .createdDate(round.getCreatedDate())
+                    .lowestTotalRate(round.getLowestTotalRate())
+                    .roundFinishStatus(round.getRoundFinishStatus())
+                    .roundNumber(round.getRoundNumber())
+                    .bidderId(round.getBidderId())
+                    .build();
+        }).toList();
+
+        return new ResponseEntity<>(new ResponseDTO<>(roundDTOS, "Success", HttpStatus.OK.value()), HttpStatus.OK);
+    }
 }

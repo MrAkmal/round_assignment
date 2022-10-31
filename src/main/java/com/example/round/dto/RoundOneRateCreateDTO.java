@@ -4,6 +4,7 @@ import com.example.round.one.RoundOne;
 import com.example.tenderitem.TenderItem;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
@@ -14,13 +15,18 @@ import java.math.BigDecimal;
 public class RoundOneRateCreateDTO {
 
 
+    @NotNull
     private int quantity;
 
+    @NotNull
     private BigDecimal rate;
 
+    @NotNull
     private int userId;
 
+    @NotNull
     private RoundOne roundOne;
 
+    @NotNull
     private TenderItem tenderItem;
 }

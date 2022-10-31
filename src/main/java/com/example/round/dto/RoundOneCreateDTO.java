@@ -2,6 +2,7 @@ package com.example.round.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -12,12 +13,16 @@ import java.time.LocalDateTime;
 @Builder
 public class RoundOneCreateDTO {
 
+    @NotNull
     private LocalDateTime submissionDateTime;
 
+    @NotNull
     private BigDecimal totalRate;
 
+    @NotNull
     private int tenderId;
 
+    @NotNull
     private int userId;
 
 }
