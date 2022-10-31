@@ -50,6 +50,7 @@ public class TenderItemService {
         return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(tenderItem), "successfully created", 201), HttpStatus.CREATED);
     }
 
+
     public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAll() {
         return new ResponseEntity<>(new ResponseDTO<>(repository.getAllTenderItems(), "Success", HttpStatus.OK.value()), HttpStatus.OK);
     }
