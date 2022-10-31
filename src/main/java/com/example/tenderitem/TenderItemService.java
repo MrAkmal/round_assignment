@@ -16,7 +16,9 @@ import java.util.Optional;
 public class TenderItemService {
 
     private final TenderItemRepository repository;
+
     private final TenderItemMapper mapper;
+
 
     @Autowired
     public TenderItemService(TenderItemRepository repository, TenderItemMapper mapper) {
@@ -29,6 +31,7 @@ public class TenderItemService {
 
         return new ResponseEntity<>(new ResponseDTO<>(getAllTenderItems(tenderId), "success", 200), HttpStatus.OK);
     }
+
 
     public List<TenderItemDTO> getAllTenderItems(Integer tenderId){
         return repository.getAllTenderItemsByTenderId(tenderId);
