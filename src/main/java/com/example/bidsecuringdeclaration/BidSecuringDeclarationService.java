@@ -16,7 +16,9 @@ import java.util.Optional;
 public class BidSecuringDeclarationService {
 
     private final BidSecuringDeclarationRepository repository;
+
     private final BidSecuringDeclarationMapper mapper;
+
 
     @Autowired
     public BidSecuringDeclarationService(BidSecuringDeclarationRepository repository, BidSecuringDeclarationMapper mapper) {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenderItemMapper {
 
+
     public TenderItemDTO toDTO(TenderItem tenderItem) {
 
         return TenderItemDTO.builder()
@@ -18,6 +19,7 @@ public class TenderItemMapper {
                 .quantity(tenderItem.getQuantity())
                 .build();
     }
+
 
     public TenderItem fromCreateDTO(TenderItemCreateDTO dto) {
 

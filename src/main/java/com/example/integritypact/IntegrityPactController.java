@@ -15,6 +15,7 @@ public class IntegrityPactController {
 
     private final IntegrityPactService service;
 
+
     @Autowired
     public IntegrityPactController(IntegrityPactService service) {
         this.service = service;

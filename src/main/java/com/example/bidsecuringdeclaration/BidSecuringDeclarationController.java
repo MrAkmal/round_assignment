@@ -16,10 +16,12 @@ public class BidSecuringDeclarationController {
 
     private final BidSecuringDeclarationService service;
 
+
     @Autowired
     public BidSecuringDeclarationController(BidSecuringDeclarationService service) {
         this.service = service;
     }
+
 
     @GetMapping
     public ResponseEntity<ResponseDTO<List<BidSecuringDeclarationDTO>>> getAllBidSecuringDeclaration() {
