@@ -1,25 +1,32 @@
 package com.example.tenderitem;
 
+import com.example.payload.ResponseDTO;
+import com.example.tenderitem.dto.TenderItemCreateDTO;
+import com.example.tenderitem.dto.TenderItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/tender_items")
 public class TenderItemController {
 
-    private final TenderItemService tenderItemService;
+    private final TenderItemService service;
 
     @Autowired
-    public TenderItemController(TenderItemService tenderItemService) {
-        this.tenderItemService = tenderItemService;
+    public TenderItemController(TenderItemService service) {
+        this.service = service;
     }
 
     @GetMapping("/{tenderId}")
-    public ResponseEntity getAllTenderItemsByTenderId(@PathVariable Integer tenderId) {
-        return null;
+    public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAllTenderItemsByTenderId(@PathVariable Integer tenderId) {
+        return service.getAllTenderItemsByTenderId(tenderId);
     }
 
-
-
+    @PostMapping
+    public ResponseEntity<ResponseDTO<TenderItemDTO>> create(@RequestBody TenderItemCreateDTO dto) {
+        return service.create(dto);
+    }
 }

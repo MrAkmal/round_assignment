@@ -1,8 +1,9 @@
-package com.example.integritypact;
+package com.example.bidsecuringdeclaration.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -10,21 +11,17 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Builder
-@Entity
-@Table(name = "integrity_pact")
-public class IntegrityPact {
+public class BidSecuringDeclarationCreateDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    @NotNull
     private Integer bidderId;
 
+    @NotNull
     private Integer tenderId;
 
-    @Column(columnDefinition = "BIT")
     private Boolean declarationStatus;
 
+    @NotBlank
     private LocalDateTime declarationTime;
 
 }
