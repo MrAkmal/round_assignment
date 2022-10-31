@@ -37,6 +37,7 @@ public class TenderItemService {
         return repository.getAllTenderItemsByTenderId(tenderId);
     }
 
+
     public TenderItem checkTenderItem(TenderItemCreateDTO dto) {
 
         Optional<TenderItem> optionalTenderItem = repository.findByTenderIdAndNameAndDescription(dto.getTenderId(), dto.getName(), dto.getDescription());
@@ -45,6 +46,7 @@ public class TenderItemService {
 
         return mapper.fromCreateDTO(dto);
     }
+
 
     public ResponseEntity<ResponseDTO<Void>> create(List<TenderItemCreateDTO> dto) {
 
