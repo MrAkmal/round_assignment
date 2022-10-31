@@ -16,7 +16,9 @@ import java.util.Optional;
 public class IntegrityPactService {
 
     private final IntegrityPactRepository repository;
+
     private final IntegrityPackMapper mapper;
+
 
     @Autowired
     public IntegrityPactService(IntegrityPactRepository repository, IntegrityPackMapper mapper) {
@@ -24,10 +26,18 @@ public class IntegrityPactService {
         this.mapper = mapper;
     }
 
+
+    public ResponseEntity<ResponseDTO<List<IntegrityPactDTO>>> getAll() {
+
+        return new ResponseEntity<>(new ResponseDTO<>(repository.getAll(), "success", 200), HttpStatus.OK);
+    }
+
+
     public ResponseEntity<ResponseDTO<List<IntegrityPactDTO>>> getIntegrityPactByTenderIdAndBidderId(Integer tenderId, Integer bidderId) {
 
         return new ResponseEntity<>(new ResponseDTO<>(repository.getIntegrityPactByTenderIdAndBidderId(tenderId, bidderId), "success", 200), HttpStatus.OK);
     }
+
 
     public ResponseEntity<ResponseDTO<IntegrityPactDTO>> create(IntegrityPactCreateDTO dto) {
 
@@ -35,8 +45,11 @@ public class IntegrityPactService {
 
         if (optionalIntegrityPact.isPresent()) throw new RuntimeException("Integrity Pact already exist");
 
-        IntegrityPact integrityPact = repository.save(mapper.fromCreateDTO(dto));
+        IntegrityPact fromCreateDTO = mapper.fromCreateDTO(dto);
+
+        IntegrityPact integrityPact = repository.save(fromCreateDTO);
 
         return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(integrityPact), "successfully created", 201), HttpStatus.CREATED);
     }
+
 }

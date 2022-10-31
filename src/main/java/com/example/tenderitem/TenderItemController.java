@@ -15,18 +15,28 @@ public class TenderItemController {
 
     private final TenderItemService service;
 
+
     @Autowired
     public TenderItemController(TenderItemService service) {
         this.service = service;
     }
+
+
+    @GetMapping
+    public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAllTenderItems() {
+        return service.getAll();
+    }
+
 
     @GetMapping("/{tenderId}")
     public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAllTenderItemsByTenderId(@PathVariable Integer tenderId) {
         return service.getAllTenderItemsByTenderId(tenderId);
     }
 
+
     @PostMapping
     public ResponseEntity<ResponseDTO<TenderItemDTO>> create(@RequestBody TenderItemCreateDTO dto) {
         return service.create(dto);
     }
+
 }

@@ -19,4 +19,12 @@ public interface IntegrityPactRepository extends JpaRepository<IntegrityPact, In
 
 
     Optional<IntegrityPact> findByTenderIdAndBidderId(Integer tenderId, Integer bidderId);
+
+
+    @Query("select " +
+            "new com.example.integritypact.dto.IntegrityPactDTO(" +
+            "ip.id,ip.bidderId,ip.tenderId,ip.declarationStatus,ip.declarationTime" +
+            ") " +
+            "from IntegrityPact ip ")
+    List<IntegrityPactDTO> getAll();
 }

@@ -15,15 +15,24 @@ public class IntegrityPactController {
 
     private final IntegrityPactService service;
 
+
     @Autowired
     public IntegrityPactController(IntegrityPactService service) {
         this.service = service;
     }
 
+
+    @GetMapping
+    public ResponseEntity<ResponseDTO<List<IntegrityPactDTO>>> getAllIntegrityPact() {
+        return service.getAll();
+    }
+
+
     @GetMapping("/{tenderId}/{bidderId}")
     public ResponseEntity<ResponseDTO<List<IntegrityPactDTO>>> getIntegrityPactByTenderIdAndBidderId(@PathVariable Integer tenderId, @PathVariable Integer bidderId) {
         return service.getIntegrityPactByTenderIdAndBidderId(tenderId, bidderId);
     }
+
 
     @PostMapping
     public ResponseEntity<ResponseDTO<IntegrityPactDTO>> create(@RequestBody IntegrityPactCreateDTO dto) {

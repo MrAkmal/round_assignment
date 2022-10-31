@@ -16,4 +16,9 @@ public interface TenderItemRepository extends JpaRepository<TenderItem, Integer>
 
     Optional<TenderItem> findByTenderIdAndNameAndDescription(Integer tenderId, String name, String description);
 
+
+    @Query("select new com.example.tenderitem.dto.TenderItemDTO(ti.id,ti.name,ti.description,ti.quantity,ti.tenderId)" +
+            " from TenderItem ti ")
+    List<TenderItemDTO> getAllTenderItems();
+
 }

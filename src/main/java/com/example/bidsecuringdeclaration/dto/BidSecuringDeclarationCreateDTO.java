@@ -2,7 +2,6 @@ package com.example.bidsecuringdeclaration.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -21,7 +20,7 @@ public class BidSecuringDeclarationCreateDTO {
 
     private Boolean declarationStatus;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime declarationTime;
 
 }

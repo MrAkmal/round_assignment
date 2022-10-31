@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @Entity
-@Table(name = "bud_securing_declaration")
+@Table(name = "bid_securing_declaration")
 public class BidSecuringDeclaration {
 
     @Id

@@ -16,7 +16,9 @@ import java.util.Optional;
 public class BidSecuringDeclarationService {
 
     private final BidSecuringDeclarationRepository repository;
+
     private final BidSecuringDeclarationMapper mapper;
+
 
     @Autowired
     public BidSecuringDeclarationService(BidSecuringDeclarationRepository repository, BidSecuringDeclarationMapper mapper) {
@@ -24,10 +26,18 @@ public class BidSecuringDeclarationService {
         this.mapper = mapper;
     }
 
+
+    public ResponseEntity<ResponseDTO<List<BidSecuringDeclarationDTO>>> getAllBidSecuringDeclaration() {
+
+        return new ResponseEntity<>(new ResponseDTO<>(repository.getAll(), "success", 200), HttpStatus.OK);
+    }
+
+
     public ResponseEntity<ResponseDTO<List<BidSecuringDeclarationDTO>>> getBidSecuringDeclarationByTenderIdAndBidderId(Integer tenderId, Integer bidderId) {
 
         return new ResponseEntity<>(new ResponseDTO<>(repository.getBidSecuringDeclarationByTenderIdAndBidderId(tenderId, bidderId), "success", 200), HttpStatus.OK);
     }
+
 
     public ResponseEntity<ResponseDTO<BidSecuringDeclarationDTO>> create(BidSecuringDeclarationCreateDTO dto) {
 
@@ -36,8 +46,13 @@ public class BidSecuringDeclarationService {
         if (optionalBidSecuringDeclaration.isPresent())
             throw new RuntimeException("BidSecureDeclaration already exist");
 
-        BidSecuringDeclaration bidSecuringDeclaration = repository.save(mapper.fromCreateDTO(dto));
+        BidSecuringDeclaration fromCreateDTO = mapper.fromCreateDTO(dto);
+
+        BidSecuringDeclaration bidSecuringDeclaration = repository.save(fromCreateDTO);
 
         return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(bidSecuringDeclaration), "successfully created", 201), HttpStatus.CREATED);
+
     }
+
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class IntegrityPackMapper {
 
+
     public IntegrityPact fromCreateDTO(IntegrityPactCreateDTO dto) {
 
         return IntegrityPact.builder()
@@ -17,6 +18,7 @@ public class IntegrityPackMapper {
                 .declarationTime(dto.getDeclarationTime())
                 .build();
     }
+
 
     public IntegrityPactDTO toDTO(IntegrityPact integrityPact) {
 

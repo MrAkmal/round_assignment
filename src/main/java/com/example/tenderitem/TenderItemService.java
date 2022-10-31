@@ -41,13 +41,10 @@ public class TenderItemService {
 
         if (optionalTenderItem.isPresent()) throw new RuntimeException("TenderItem already exist");
 
-        TenderItem tenderItem = repository.save(mapper.fromCreateDTO(dto));
+        TenderItem fromCreateDTO = mapper.fromCreateDTO(dto);
+
+        TenderItem tenderItem = repository.save(fromCreateDTO);
 
         return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(tenderItem), "successfully created", 201), HttpStatus.CREATED);
     }
-
-
-
-
-
 }
