@@ -1,6 +1,7 @@
 package com.example.round.one;
 
 
+import com.example.tenderitem.TenderItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,8 @@ public class RoundOneRate {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private RoundOne roundOne;
 
-    private int tenderItemId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private TenderItem tenderItem;
 
 }

@@ -1,10 +1,7 @@
 package com.example.round;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "round")
 public class Round {
@@ -33,7 +31,7 @@ public class Round {
     @Column(nullable = false)
     private BigDecimal lowestTotalRate;
 
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "BIT")
     private Boolean roundFinishStatus;
 
     @Column(nullable = false)
