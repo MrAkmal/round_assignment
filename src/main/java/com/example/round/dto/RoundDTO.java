@@ -2,7 +2,6 @@ package com.example.round.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -11,10 +10,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RoundCreateDTO {
+public class RoundDTO {
 
+    private Integer id;
 
-    @NotNull
     private int tenderId;
 
     private LocalDateTime createdDate;
@@ -23,11 +22,8 @@ public class RoundCreateDTO {
 
     private Boolean roundFinishStatus;
 
-    @NotNull
     private int roundNumber;
 
-    @NotNull
     private int bidderId;
-
 
 }

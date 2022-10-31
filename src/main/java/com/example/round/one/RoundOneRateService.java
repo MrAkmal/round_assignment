@@ -27,6 +27,8 @@ public class RoundOneRateService {
 
         List<TenderItemDTO> tenderItems = tenderItemService.getAllTenderItems(roundOne.getTenderId());
 
+        
+
         List<RoundOneRate> roundOneRates = fromTenderItemsList(tenderItems, roundOne);
 
         repository.saveAll(roundOneRates);
