@@ -5,6 +5,8 @@ import com.example.bidsecuringdeclaration.dto.BidSecuringDeclarationCreateDTO;
 import com.example.bidsecuringdeclaration.dto.BidSecuringDeclarationDTO;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class BidSecuringDeclarationMapper {
 
@@ -15,7 +17,7 @@ public class BidSecuringDeclarationMapper {
                 .bidderId(dto.getBidderId())
                 .tenderId(dto.getTenderId())
                 .declarationStatus(dto.getDeclarationStatus())
-                .declarationTime(dto.getDeclarationTime())
+                .declarationTime(LocalDateTime.now())
                 .build();
 
     }

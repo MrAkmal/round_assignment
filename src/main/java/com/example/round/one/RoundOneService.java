@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoundOneService {
+public class  RoundOneService {
 
 
     private final RoundOneRepository repository;
