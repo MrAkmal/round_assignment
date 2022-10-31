@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class BidSecuringDeclarationController {
 
 
     @PostMapping
-    public ResponseEntity<ResponseDTO<BidSecuringDeclarationDTO>> create(@RequestBody BidSecuringDeclarationCreateDTO dto, BindingResult result) {
+    public ResponseEntity<ResponseDTO<BidSecuringDeclarationDTO>> create(@Valid @RequestBody BidSecuringDeclarationCreateDTO dto, BindingResult result) {
 
         return service.create(dto);
     }

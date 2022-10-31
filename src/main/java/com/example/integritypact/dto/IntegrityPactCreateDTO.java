@@ -1,6 +1,7 @@
 package com.example.integritypact.dto;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,10 +14,12 @@ import java.time.LocalDateTime;
 @Builder
 public class IntegrityPactCreateDTO {
 
-    @NotNull
+    @NotNull(message= "bidderId may not be empty")
+    @Range(min = 1)
     private Integer bidderId;
 
-    @NotNull
+    @NotNull(message= "tenderId may not be empty")
+    @Range(min = 1)
     private Integer tenderId;
 
     private Boolean declarationStatus;
