@@ -1,6 +1,7 @@
 package com.example.tenderitem.dto;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -12,16 +13,18 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class TenderItemCreateDTO {
 
-    @NotBlank
+    @NotBlank(message = "name required")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "description required")
     private String description;
 
-    @NotNull
+    @NotNull(message= "quantity may not be empty")
+    @Range(min = 1)
     private Integer quantity;
 
-    @NotNull
+    @NotNull(message= "tenderId may not be empty")
+    @Range(min = 1)
     private Integer tenderId;
 
 }

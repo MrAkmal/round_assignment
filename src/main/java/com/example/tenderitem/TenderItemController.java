@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class TenderItemController {
 
 
     @PostMapping
-    public ResponseEntity<ResponseDTO<TenderItemDTO>> create(@RequestBody TenderItemCreateDTO dto) {
+    public ResponseEntity<ResponseDTO<TenderItemDTO>> create(@Valid @RequestBody TenderItemCreateDTO dto) {
         return service.create(dto);
     }
 
