@@ -30,7 +30,7 @@ public class TenderItemService {
         return new ResponseEntity<>(new ResponseDTO<>(getAllTenderItems(tenderId), "success", 200), HttpStatus.OK);
     }
 
-    public List<TenderItemDTO> getAllTenderItems(Integer tenderId){
+    public List<TenderItemDTO> getAllTenderItems(Integer tenderId) {
         return repository.getAllTenderItemsByTenderId(tenderId);
     }
 
@@ -46,5 +46,9 @@ public class TenderItemService {
         TenderItem tenderItem = repository.save(fromCreateDTO);
 
         return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(tenderItem), "successfully created", 201), HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAll() {
+        return new ResponseEntity<>(new ResponseDTO<>(repository.getAllTenderItems(), "Success", HttpStatus.OK.value()), HttpStatus.OK);
     }
 }
