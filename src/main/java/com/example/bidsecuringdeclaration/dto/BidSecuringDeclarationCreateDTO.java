@@ -23,7 +23,4 @@ public class BidSecuringDeclarationCreateDTO {
 
     private Boolean declarationStatus;
 
-    @NotNull
-    private LocalDateTime declarationTime;
-
 }

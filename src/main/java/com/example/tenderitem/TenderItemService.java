@@ -32,26 +32,36 @@ public class TenderItemService {
         return new ResponseEntity<>(new ResponseDTO<>(getAllTenderItems(tenderId), "success", 200), HttpStatus.OK);
     }
 
-    public List<TenderItemDTO> getAllTenderItems(Integer tenderId){
+
+    public List<TenderItemDTO> getAllTenderItems(Integer tenderId) {
         return repository.getAllTenderItemsByTenderId(tenderId);
     }
 
 
-    public ResponseEntity<ResponseDTO<TenderItemDTO>> create(TenderItemCreateDTO dto) {
+    public TenderItem checkTenderItem(TenderItemCreateDTO dto) {
 
         Optional<TenderItem> optionalTenderItem = repository.findByTenderIdAndNameAndDescription(dto.getTenderId(), dto.getName(), dto.getDescription());
 
         if (optionalTenderItem.isPresent()) throw new RuntimeException("TenderItem already exist");
 
-        TenderItem fromCreateDTO = mapper.fromCreateDTO(dto);
+        return mapper.fromCreateDTO(dto);
+    }
 
-        TenderItem tenderItem = repository.save(fromCreateDTO);
 
-        return new ResponseEntity<>(new ResponseDTO<>(mapper.toDTO(tenderItem), "successfully created", 201), HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO<Void>> create(List<TenderItemCreateDTO> dto) {
+
+        List<TenderItem> tenderItems = dto.stream()
+                .map(this::checkTenderItem)
+                .toList();
+
+        repository.saveAll(tenderItems);
+
+        return new ResponseEntity<>(new ResponseDTO<>(null, "successfully created", 201), HttpStatus.CREATED);
     }
 
 
     public ResponseEntity<ResponseDTO<List<TenderItemDTO>>> getAll() {
         return new ResponseEntity<>(new ResponseDTO<>(repository.getAllTenderItems(), "Success", HttpStatus.OK.value()), HttpStatus.OK);
     }
+
 }

@@ -5,6 +5,8 @@ import com.example.integritypact.dto.IntegrityPactCreateDTO;
 import com.example.integritypact.dto.IntegrityPactDTO;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class IntegrityPackMapper {
 
@@ -15,7 +17,7 @@ public class IntegrityPackMapper {
                 .bidderId(dto.getBidderId())
                 .tenderId(dto.getTenderId())
                 .declarationStatus(dto.getDeclarationStatus())
-                .declarationTime(dto.getDeclarationTime())
+                .declarationTime(LocalDateTime.now())
                 .build();
     }
 
