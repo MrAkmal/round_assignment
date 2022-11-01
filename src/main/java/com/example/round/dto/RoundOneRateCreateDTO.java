@@ -25,6 +25,6 @@ public class RoundOneRateCreateDTO {
     private int userId;
 
     @NotNull
-    private TenderItem tenderItem;
+    private int tenderItemId;
 
 }

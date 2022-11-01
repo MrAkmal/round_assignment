@@ -1,6 +1,7 @@
 package com.example.round.two;
 
 import com.example.round.dto.RoundTwoRateCreateDTO;
+import com.example.tenderitem.TenderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class RoundTwoRateService {
                 .rate(dto.getRate())
                 .userId(dto.getUserId())
                 .roundOne(roundOne)
-                .tenderItem(dto.getTenderItem())
+                .tenderItem(new TenderItem(dto.getTenderItemId()))
                 .build()).toList();
 
         repository.saveAll(roundOneRates);

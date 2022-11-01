@@ -25,4 +25,7 @@ public class TenderItem {
 
     private Integer tenderId;
 
+    public TenderItem(Integer id) {
+        this.id = id;
+    }
 }
