@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ public class RoundService {
 
         if (dto.getLowestTotalRate().compareTo(round.getLowestTotalRate()) < 0) {
             round.setLowestTotalRate(dto.getLowestTotalRate());
+            round.setBidderId(dto.getBidderId());
             repository.save(round);
         }
 
@@ -44,7 +46,7 @@ public class RoundService {
 
         return Round.builder()
                 .tenderId(dto.getTenderId())
-                .createdDate(dto.getCreatedDate())
+                .createdDate(LocalDateTime.now())
                 .lowestTotalRate(dto.getLowestTotalRate())
                 .roundFinishStatus(dto.getRoundFinishStatus())
                 .roundNumber(dto.getRoundNumber())

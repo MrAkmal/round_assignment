@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/round-two")
 public class RoundTwoController {
@@ -24,7 +26,7 @@ public class RoundTwoController {
 
 
     @PostMapping
-    public ResponseEntity<ResponseDTO<RoundTwoDTO>> create(@RequestBody RoundTwoCreateDTO dto) {
+    public ResponseEntity<ResponseDTO<RoundTwoDTO>> create(@Valid @RequestBody RoundTwoCreateDTO dto) {
 
         return service.create(dto);
 

@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @Builder
 public class RoundOneCreateDTO {
 
-    @NotNull
-    private LocalDateTime submissionDateTime;
 
     @NotNull
     private BigDecimal totalRate;
@@ -24,5 +22,8 @@ public class RoundOneCreateDTO {
 
     @NotNull
     private int userId;
+
+
+    private List<RoundOneRateCreateDTO> roundOneRateCreateDTO;
 
 }

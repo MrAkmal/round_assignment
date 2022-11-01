@@ -35,7 +35,7 @@ public class TenderItemController {
     }
 
 
-    @PostMapping
+    @PostMapping//list of createDTO
     public ResponseEntity<ResponseDTO<TenderItemDTO>> create(@Valid @RequestBody TenderItemCreateDTO dto) {
         return service.create(dto);
     }

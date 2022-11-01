@@ -1,8 +1,6 @@
 package com.example.round.two;
 
-import com.example.tenderitem.TenderItem;
-import com.example.tenderitem.TenderItemService;
-import com.example.tenderitem.dto.TenderItemDTO;
+import com.example.round.dto.RoundTwoRateCreateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,50 +12,23 @@ public class RoundTwoRateService {
 
     private final RoundTwoRateRepository repository;
 
-    private final TenderItemService tenderItemService;
 
     @Autowired
-    public RoundTwoRateService(RoundTwoRateRepository repository, TenderItemService tenderItemService) {
+    public RoundTwoRateService(RoundTwoRateRepository repository) {
         this.repository = repository;
-        this.tenderItemService = tenderItemService;
     }
 
-    public void create(RoundTwo roundOne) {
+    public void create(List<RoundTwoRateCreateDTO> roundTwoRateCreateDTOS, RoundTwo roundOne) {
 
-        List<TenderItemDTO> tenderItems = tenderItemService.getAllTenderItems(roundOne.getTenderId());
-
-        List<RoundTwoRate> roundOneRates = fromTenderItemsList(tenderItems, roundOne);
+        List<RoundTwoRate> roundOneRates = roundTwoRateCreateDTOS.stream().map(dto -> RoundTwoRate.builder()
+                .quantity(dto.getQuantity())
+                .rate(dto.getRate())
+                .userId(dto.getUserId())
+                .roundOne(roundOne)
+                .tenderItem(dto.getTenderItem())
+                .build()).toList();
 
         repository.saveAll(roundOneRates);
-
-    }
-
-
-    private List<RoundTwoRate> fromTenderItemsList(List<TenderItemDTO> tenderItemsDTO, RoundTwo roundOne) {
-
-
-        return fromDTO(tenderItemsDTO).stream().map(tenderItem -> {
-            return RoundTwoRate.builder()
-                    .quantity(tenderItem.getQuantity())
-                    .rate(roundOne.getTotalRate())
-                    .userId(roundOne.getUserId())
-                    .roundOne(roundOne)
-                    .tenderItem(tenderItem)
-                    .build();
-        }).toList();
-
-
-    }
-
-
-    private List<TenderItem> fromDTO(List<TenderItemDTO> tenderItemDTOS) {
-
-        return tenderItemDTOS.stream().map(dto -> TenderItem.builder()
-                .name(dto.getName())
-                .description(dto.getDescription())
-                .quantity(dto.getQuantity())
-                .tenderId(dto.getTenderId())
-                .build()).toList();
 
     }
 

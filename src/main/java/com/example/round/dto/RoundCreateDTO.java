@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,7 +16,6 @@ public class RoundCreateDTO {
     @NotNull
     private int tenderId;
 
-    private LocalDateTime createdDate;
 
     private BigDecimal lowestTotalRate;
 

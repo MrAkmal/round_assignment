@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class RoundTwoService {
 
@@ -31,11 +33,11 @@ public class RoundTwoService {
 
     public ResponseEntity<ResponseDTO<RoundTwoDTO>> create(RoundTwoCreateDTO dto) {
 
-        Round round = roundService.checkAndSave(new RoundCreateDTO(dto.getTenderId(), dto.getSubmissionDateTime(), dto.getTotalRate(), false, 2, dto.getUserId()));
+        Round round = roundService.checkAndSave(new RoundCreateDTO(dto.getTenderId(), dto.getTotalRate(), false, 2, dto.getUserId()));
 
         RoundTwo roundTwo = repository.save(fromCreateDTO(dto, round));
 
-        roundTwoRateService.create(roundTwo);
+        roundTwoRateService.create(dto.getRoundTwoRateCreateDTOS(), roundTwo);
 
         return new ResponseEntity<>(new ResponseDTO<>(toDTO(roundTwo), "Success", HttpStatus.CREATED.value()), HttpStatus.OK);
 
@@ -55,7 +57,7 @@ public class RoundTwoService {
     private RoundTwo fromCreateDTO(RoundTwoCreateDTO dto, Round round) {
 
         return RoundTwo.builder()
-                .submissionDateTime(dto.getSubmissionDateTime())
+                .submissionDateTime(LocalDateTime.now())
                 .totalRate(dto.getTotalRate())
                 .tenderId(dto.getTenderId())
                 .userId(dto.getUserId())
